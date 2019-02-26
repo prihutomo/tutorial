@@ -10,9 +10,7 @@
 <body>
     <div id="app">
         <h1>{{ message }}</h1>
-        <ul>
-            <li v-for="count in count">Item #{{ count }}</li>
-        </ul>  
+        <input type="text" v-model="message">  
     </div>
 </body>
 
@@ -23,12 +21,6 @@
         el: '#app',
         data:{
             message: 'Hello Vue World',
-            todos: [
-                { text:'Learn vue', id: 1 },
-                { text:'Like the vue', id: 2},
-                { text:'Subcribe the vue', id: 3},
-            ],
-            count: 500
         }
     })
 </script>
