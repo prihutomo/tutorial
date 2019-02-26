@@ -6,18 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue.Js Tutorial | Directives</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
-    <style>
-        [v-cloak]{
-            background-color: red;
-        }
-    </style>
-    
 </head>
 <body>
     <div id="app">
-        <h1 v-cloak>{{ message }}</h1>  
-        <!-- <h1 v-else>Not Learn To Basic</h1>     -->
+        <h1 :title="title">{{ message }}</h1>
+        <img :src="url" :alt="title" :title="title">  
     </div>
 </body>
 
@@ -28,9 +21,8 @@
         el: '#app',
         data:{
             message: 'Hello Vue World',
-            intro : 'Welcome to the tutorial <small>OK</small>',
-            viewed : false,
-            viewed2 : true
+            title: 'Oke Lets Go ' + new Date(),
+            url : "http://vuejs.org/images/logo.png"
         }
     })
 </script>
