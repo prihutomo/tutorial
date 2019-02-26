@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vue.Js Tutorial | Directives</title>
+    <title>Vue.Js Tutorial | More Computed Properties</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
@@ -15,11 +15,24 @@
                 <ul class="text-left">
                     <li>First Name: {{ first }}</li>
                     <li>Last Name: {{ last }}</li>
+                    <li>Phone: {{ phone }}</li>
                 </ul>
                 <hr>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Full Name</label>
+                    <input type="text" class="form-control" v-model="fullname">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" class="form-control" v-model="phone">
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">First Name</label>
@@ -43,13 +56,26 @@
         el: '#app',
         data: {
             first: '',
-            last: ''
+            last: '',
+            phone: ''
         },
         computed: {
-            fullname: function(){
-                return this.first + " " + this.last
+            fullname: {
+                //Getter
+                get: function() {
+                    return this.first + " " + this.last
+                },
+                //Setter
+                set: function(value) {
+                    var name = value.split(' ')
+                    //John Doe
+                    //name[0] = "John"
+                    //name[1] = "Doe"
+                    this.first = name[0]
+                    this.last = name[name.length - 1]
+                }
             }
-        },
+        }
     })
 </script>
 
