@@ -9,8 +9,10 @@
 </head>
 <body>
     <div id="app">
-        <h1 :title="title">{{ message }}</h1>
-        <img :src="url" :alt="title" :title="title">  
+        <h1>{{ message }}</h1>
+        <ul>
+            <li v-for="count in count">Item #{{ count }}</li>
+        </ul>  
     </div>
 </body>
 
@@ -21,8 +23,12 @@
         el: '#app',
         data:{
             message: 'Hello Vue World',
-            title: 'Oke Lets Go ' + new Date(),
-            url : "http://vuejs.org/images/logo.png"
+            todos: [
+                { text:'Learn vue', id: 1 },
+                { text:'Like the vue', id: 2},
+                { text:'Subcribe the vue', id: 3},
+            ],
+            count: 500
         }
     })
 </script>
