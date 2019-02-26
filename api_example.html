@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueJS Tutorial</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href=""> -->
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="lead-form">
+                        <h1 class="text-center">Isi Form Ini</h1>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Mulai" v-model="mulaiKode">
+                                <span class="city-span">{{ mulaiKota }}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Sampai" v-model="sampaiKode">
+                                <span class="city-span">{{ sampaiKode }}</span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary btn-block" id="submit-form">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+<script src="https://unpkg.com/vue@2.6.7/dist/vue.js"></script>
+<script src="https://unpkg.com/axios@0.17.0/dist/axios.min.js"></script>
+<script src="https://unpkg.com/lodash@4.17.11/lodash.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            mulaiKode: '',
+            mulaiKota: '',
+            sampaiKode: '',
+            sampaiKota: ''
+        },
+        watch: {
+            mulaiKode: function() {
+                this.mulaiKota = ''
+                if (this.mulaiKode.length == 5) {
+                    this.cariMulaiKode()
+                }
+            }
+        },
+        methods: {
+            cariMulaiKode: _.debounce(function() {
+                var app = this
+                app.mulaiKota = "Mulai Pencarian..."
+                axios.get('https://ziptasticapi.com/' + app.mulaiKode)
+                        .then(function (response){
+                            app.mulaiKota = response.data.city + ', ' + response.data.state
+                        })
+                        .catch(function(error){
+                            app.mulaiKota = 'Kode Tidak Ditemukan'
+                        })
+            }, 500)
+        },
+    })
+</script>
+</html>
